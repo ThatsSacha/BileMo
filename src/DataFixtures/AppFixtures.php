@@ -35,6 +35,14 @@ class AppFixtures extends Fixture
                  ->setEmail($faker->email)
                  ->setPassword(hash('sha256', $faker->password))
                  ->setClient($faker->randomElement($clients));
+            
+            if ($i === 99) {
+                $user->setFirstName('Sacha')
+                    ->setLastName('COHEN')
+                    ->setEmail('contact@sacha-cohen.fr')
+                    ->setPassword('$2y$13$HmVJnid6pyJb1E/acpCIduTIIpWcploaYC42fd.94sjGihnzaYKb6')
+                    ->setClient($faker->randomElement($clients));
+            }
 
             $users[] = $user;
             $manager->persist($user);
