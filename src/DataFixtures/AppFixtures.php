@@ -35,14 +35,12 @@ class AppFixtures extends Fixture
 
             $user->setFirstName($firstName)
                  ->setLastName($lastName)
-                 ->setUsername($slugify->slugify($firstName . ' ' . $lastName))
                  ->setEmail($faker->email)
                  ->setPassword(hash('sha256', $faker->password))
                  ->setClient($faker->randomElement($clients));
             
             if ($i === 99) {
                 $user->setFirstName('Sacha')
-                    ->setUsername('sacha-cohen')
                     ->setLastName('COHEN')
                     ->setEmail('contact@sacha-cohen.fr')
                     ->setPassword('$2y$13$HmVJnid6pyJb1E/acpCIduTIIpWcploaYC42fd.94sjGihnzaYKb6')

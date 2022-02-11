@@ -34,9 +34,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private $client;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $username;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -139,18 +136,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setClient(?Client $client): self
     {
         $this->client = $client;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(?string $username): self
-    {
-        $this->username = $username;
 
         return $this;
     }
