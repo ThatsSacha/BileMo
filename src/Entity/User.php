@@ -34,6 +34,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private $client;
 
+    public function jsonSerialize(): array {
+        return array(
+            'id' => $this->getId(),
+            'email' => $this->getEmail(),
+            'firstName' => $this->getFirstName(),
+            'lastName' => $this->getLastName(),
+            'client' => $this->getClient()->jsonSerializeLight()
+        );
+    }
+
     public function getId(): ?int
     {
         return $this->id;
