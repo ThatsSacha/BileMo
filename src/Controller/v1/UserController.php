@@ -22,12 +22,6 @@ class UserController extends AbstractController
         $this->userService = $userService;
     }
 
-    #[Route('', name: 'user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): never
-    {
-        //
-    }
-
     #[Route('', name: 'user_new', methods: ['POST'])]
     public function new(Request $request): JsonResponse
     {
@@ -43,15 +37,9 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'user_show', methods: ['GET'])]
     public function show(int $id): JsonResponse
     {
-        $delete = $this->userService->show($id, $this->getUser());
+        $show = $this->userService->show($id, $this->getUser());
 
-        return new JsonResponse($delete, $delete['status']);
-    }
-
-    #[Route('/{id}', name: 'user_edit', methods: ['PUT'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager): never
-    {
-       //
+        return new JsonResponse($show, $show['status']);
     }
 
     #[Route('/{id}', name: 'user_delete', methods: ['DELETE'])]

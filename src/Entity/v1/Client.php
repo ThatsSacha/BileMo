@@ -24,6 +24,15 @@ class Client
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: User::class, orphanRemoval: true)]
     private $users;
 
+    public function jsonSerialize(): array {
+        return array(
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'slug' => $this->getSlug(),
+            'users' => $this->getUsersSerialized()
+        );
+    }
+
     public function jsonSerializeLight(): array {
         return array(
             'id' => $this->getId(),
@@ -72,6 +81,16 @@ class Client
     public function getUsers(): Collection
     {
         return $this->users;
+    }
+
+    public function getUsersSerialized(): array {
+        $users = [];
+
+        foreach ($this->getUsers() as $user) {
+            $users[] = $user->jsonSerializeLight();
+        }
+
+        return $users;
     }
 
     public function addUser(User $user): self
