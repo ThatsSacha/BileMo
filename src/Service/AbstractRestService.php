@@ -26,6 +26,11 @@ class AbstractRestService {
         $this->entityManagerInterface->flush();
     }
 
+    public function delete(object $objet) {
+        $this->entityManagerInterface->remove($objet);
+        $this->entityManagerInterface->flush();
+    }
+
     /**
      * @param array $data
      * @param string $format

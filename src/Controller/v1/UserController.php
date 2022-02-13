@@ -53,8 +53,10 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'user_delete', methods: ['DELETE'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): never
+    public function delete(int $id): JsonResponse
     {
-        //
+        $delete = $this->userService->deleteUser($id, $this->getUser());
+
+        return new JsonResponse($delete, $delete['status']);
     }
 }

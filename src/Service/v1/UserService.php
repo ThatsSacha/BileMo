@@ -106,6 +106,41 @@ class UserService extends AbstractRestService {
         }
     }
 
+    public function deleteUser(int $id, User $user): array {
+        $userToDelete = $this->findOneBy(['id' => $id]);
+
+        if ($userToDelete !== null) {
+            if ($userToDelete->getEmail() !== $user->getEmail()) {
+                // Prevent a user to delete a user on a different client than himself
+                $isCurrentUserFromClient = $userToDelete->getClient()->getSlug() === $user->getClient()->getSlug();
+
+                if ($isCurrentUserFromClient) {
+                    $this->delete($userToDelete);
+
+                    return [
+                        'status' => Response::HTTP_OK,
+                        'message' => 'User deleted'
+                    ];
+                } else {
+                    return [
+                        'status' => Response::HTTP_FORBIDDEN,
+                        'message' => 'You are not allowed to delete a user for this client'
+                    ];
+                }
+            } else {
+                return [
+                    'status' => Response::HTTP_FORBIDDEN,
+                    'message' => 'You cannot delete yourself'
+                ];
+            }
+        } else {
+            return [
+                'status' => Response::HTTP_NOT_FOUND,
+                'message' => 'User not found'
+            ];
+        }
+    }
+
     /**
      * @param Collection $client
      * @param string $mail The email of the user to check
