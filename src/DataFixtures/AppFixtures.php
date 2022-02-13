@@ -3,8 +3,8 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
-use App\Entity\Client;
-use App\Entity\User;
+use App\Entity\v1\User;
+use App\Entity\v1\Client;
 use Cocur\Slugify\Slugify;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;

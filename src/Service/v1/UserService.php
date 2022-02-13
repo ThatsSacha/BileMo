@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\v1;
 
-use App\Entity\User;
-use App\Repository\UserRepository;
+use App\Entity\v1\User;
+use App\Repository\v1\UserRepository;
+use App\Service\AbstractRestService;
+use App\v1\Service\ClientService;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;

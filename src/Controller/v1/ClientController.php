@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller√v1;
 
-use App\Entity\Client;
-use App\Entity\User;
-use App\Form\ClientType;
-use App\Repository\ClientRepository;
+use App\Entity\v1\Client;
+use App\Entity\v1\User;
+use App\Repository\v1\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/api/client')]
+#[Route('/v1/api/client')]
 class ClientController extends AbstractController
 {
     #[Route('', name: 'client_index', methods: ['GET'])]

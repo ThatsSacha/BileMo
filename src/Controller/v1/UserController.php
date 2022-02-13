@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\v1;
 
-use App\Entity\User;
-use App\Form\UserType;
-use App\Repository\UserRepository;
-use App\Service\UserService;
+use App\Entity\v1\User;
+use App\Service\v1\UserService;
+use App\Repository\v1\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/api/user')]
+#[Route('/v1/api/user')]
 class UserController extends AbstractController
 {
     private UserService $userService;
