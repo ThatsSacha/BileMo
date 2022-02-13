@@ -3,9 +3,12 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
+use App\Entity\Product;
+use App\Entity\ProductImage;
 use App\Entity\v1\User;
 use App\Entity\v1\Client;
 use Cocur\Slugify\Slugify;
+use App\ProductModel\ProductModel;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -49,6 +52,26 @@ class AppFixtures extends Fixture
 
             $users[] = $user;
             $manager->persist($user);
+        }
+
+        $productModel = new ProductModel();
+        $products = $productModel->genereate();
+        foreach ($products as $product) {
+            $productObject = new Product();
+            $productObject->setName($product['name'])
+                          ->setDescription($product['description'])
+                          ->setDateReleased(new \DateTime($product['dateReleased']));
+                          
+            for($i = 0; $i < count($product['productImage']); $i++) {
+                $productImageObject = new ProductImage();
+                $productImageObject->setUrl($product['productImage'][$i]['url']);
+
+                $manager->persist($productImageObject);
+
+                $productObject->addProductImage($productImageObject);
+            }
+
+            $manager->persist($productObject);
         }
 
         $manager->flush();
