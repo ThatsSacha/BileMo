@@ -23,10 +23,18 @@ class ClientController extends AbstractController
     }
 
     #[Route('/{slug}/user/all', name: 'client_show_user_all', methods: ['GET'])]
-    public function show(string $slug): JsonResponse
+    public function showAllUsers(string $slug): JsonResponse
     {
         $showAll = $this->clientService->showAllUsers($slug, $this->getUser());
 
         return new JsonResponse($showAll, $showAll['status']);
+    }
+
+    #[Route('/{slug}/user/{id}', name: 'client_show_user_detail', methods: ['GET'])]
+    public function showUserDetail(string $slug, int $id): JsonResponse
+    {
+        $showDetail = $this->clientService->showDetailUser($slug, $id, $this->getUser());
+
+        return new JsonResponse($showDetail, $showDetail['status']);
     }
 }
