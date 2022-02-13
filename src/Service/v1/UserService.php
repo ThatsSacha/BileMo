@@ -2,7 +2,6 @@
 
 namespace App\Service\v1;
 
-use App\Entity\v1\Client;
 use App\Entity\v1\User;
 use App\Service\v1\ClientService;
 use App\Service\AbstractRestService;

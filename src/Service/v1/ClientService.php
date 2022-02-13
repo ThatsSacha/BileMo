@@ -6,7 +6,6 @@ use App\Entity\v1\User;
 use App\Service\AbstractRestService;
 use App\Repository\v1\ClientRepository;
 use App\Repository\v1\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 class ClientService extends AbstractRestService {

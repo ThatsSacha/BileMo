@@ -2,12 +2,8 @@
 
 namespace App\Controller\v1;
 
-use App\Entity\v1\User;
 use App\Service\v1\UserService;
-use App\Repository\v1\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
