@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Controller√v1;
+namespace App\Controller\v1;
 
 use App\Entity\v1\Client;
-use App\Entity\v1\User;
 use App\Repository\v1\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -29,6 +29,12 @@ class UserService extends AbstractRestService {
         parent::__construct($denormalizer, $repo, $emi);
     }
 
+    /**
+     * @param array $data
+     * @param User $user
+     * 
+     * @return array
+     */
     public function new(array $data, User $user): array {
         $mandatoryFields = ['firstName', 'lastName', 'email', 'password', 'client'];
         $missingFields = $this->getMissingFields($data, $mandatoryFields);
