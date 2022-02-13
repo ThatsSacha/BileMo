@@ -3,14 +3,14 @@
 namespace App\Service\v1;
 
 use App\Entity\v1\User;
-use App\Repository\v1\UserRepository;
+use App\Service\v1\ClientService;
 use App\Service\AbstractRestService;
-use App\v1\Service\ClientService;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\v1\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserService extends AbstractRestService {
     private ClientService $clientService;

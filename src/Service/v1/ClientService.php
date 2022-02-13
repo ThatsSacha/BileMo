@@ -1,8 +1,7 @@
 <?php
 
-namespace App\v1\Service;
+namespace App\Service\v1;
 
-use App\Entity\v1\User;
 use App\Repository\v1\ClientRepository;
 use App\Service\AbstractRestService;
 use Doctrine\ORM\EntityManagerInterface;
