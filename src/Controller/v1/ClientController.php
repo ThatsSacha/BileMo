@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/v1/api/client')]
+#[Route('/api/v1/client')]
 class ClientController extends AbstractController
 {
     #[Route('', name: 'client_index', methods: ['GET'])]

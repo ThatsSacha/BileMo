@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/v1/api/user')]
+#[Route('/api/v1/user')]
 class UserController extends AbstractController
 {
     private UserService $userService;
@@ -29,7 +29,7 @@ class UserController extends AbstractController
     }
 
     #[Route('', name: 'user_new', methods: ['POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    public function new(Request $request): JsonResponse
     {
         if ($request->getContentType() === 'json') {
             $data = json_decode($request->getContent(), true);
