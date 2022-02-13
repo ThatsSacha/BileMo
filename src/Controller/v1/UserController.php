@@ -41,9 +41,11 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'user_show', methods: ['GET'])]
-    public function show(User $user): never
+    public function show(int $id): JsonResponse
     {
-        //
+        $delete = $this->userService->show($id, $this->getUser());
+
+        return new JsonResponse($delete, $delete['status']);
     }
 
     #[Route('/{id}', name: 'user_edit', methods: ['PUT'])]

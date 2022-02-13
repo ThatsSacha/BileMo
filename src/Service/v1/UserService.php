@@ -2,6 +2,7 @@
 
 namespace App\Service\v1;
 
+use App\Entity\v1\Client;
 use App\Entity\v1\User;
 use App\Service\v1\ClientService;
 use App\Service\AbstractRestService;
@@ -50,7 +51,7 @@ class UserService extends AbstractRestService {
                     
                     if ($client !== null) {
                         // Prevent a user to add a new user on a different client than himself
-                        $isCurrentUserFromClient = $client->getSlug() === $user->getClient()->getSlug();
+                        $isCurrentUserFromClient = $this->isUserFromClient($client->getSlug(), $user);
                         
                         if ($isCurrentUserFromClient) {
                             $userExists = $this->isUserAlreadyExistsInClient($client->getUsers(), $data['email']);
@@ -106,13 +107,19 @@ class UserService extends AbstractRestService {
         }
     }
 
+    /**
+     * @param int $id
+     * @param User $user
+     * 
+     * @return array
+     */
     public function deleteUser(int $id, User $user): array {
         $userToDelete = $this->findOneBy(['id' => $id]);
 
         if ($userToDelete !== null) {
             if ($userToDelete->getEmail() !== $user->getEmail()) {
                 // Prevent a user to delete a user on a different client than himself
-                $isCurrentUserFromClient = $userToDelete->getClient()->getSlug() === $user->getClient()->getSlug();
+                $isCurrentUserFromClient = $this->isUserFromClient($userToDelete->getClient()->getSlug(), $user);
 
                 if ($isCurrentUserFromClient) {
                     $this->delete($userToDelete);
@@ -139,6 +146,50 @@ class UserService extends AbstractRestService {
                 'message' => 'User not found'
             ];
         }
+    }
+
+    /**
+     * @param int $id
+     * @param User $user
+     * 
+     * @return array
+     */
+    public function show(int $id, User $user): array {
+        $userToShow = $this->findOneBy(['id' => $id]);
+
+        if ($userToShow !== null) {
+            // Prevent a user to show a user on a different client than himself
+            $isCurrentUserFromClient = $this->isUserFromClient($userToShow->getClient()->getSlug(), $user);
+
+            if ($isCurrentUserFromClient) {
+                return [
+                    'status' => Response::HTTP_OK,
+                    'user' => $userToShow->jsonSerialize()
+                ];
+            } else {
+                return [
+                    'status' => Response::HTTP_FORBIDDEN,
+                    'message' => 'You are not allowed to show a user for this client'
+                ];
+            }
+        } else {
+            return [
+                'status' => Response::HTTP_NOT_FOUND,
+                'message' => 'User not found'
+            ];
+        }
+    }
+
+    /**
+     * This function checks that the user making the request is from the same client as $the $clientSlug passed in parameter
+     * 
+     * @param string $clientSlug The client slug
+     * @param User $user The current user making the request
+     * 
+     * @return array
+     */
+    public function isUserFromClient(string $clientSlug, User $user): bool {
+        return $clientSlug === $user->getClient()->getSlug();
     }
 
     /**
