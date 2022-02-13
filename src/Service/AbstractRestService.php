@@ -2,9 +2,10 @@
 
 namespace App\Service;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\v1\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 class AbstractRestService {
     private DenormalizerInterface $denormalizer;
@@ -29,6 +30,18 @@ class AbstractRestService {
     public function delete(object $objet) {
         $this->entityManagerInterface->remove($objet);
         $this->entityManagerInterface->flush();
+    }
+
+    /**
+     * This function checks that the user making the request is from the same client as $the $clientSlug passed in parameter
+     * 
+     * @param string $clientSlug The client slug
+     * @param User $user The current user making the request
+     * 
+     * @return array
+     */
+    public function isUserFromClient(string $clientSlug, User $user): bool {
+        return $clientSlug === $user->getClient()->getSlug();
     }
 
     /**

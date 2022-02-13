@@ -44,6 +44,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         );
     }
 
+    public function jsonSerializeLight(): array {
+        return array(
+            'id' => $this->getId(),
+            'email' => $this->getEmail(),
+            'firstName' => $this->getFirstName(),
+            'lastName' => $this->getLastName()
+        );
+    }
+
     public function getId(): ?int
     {
         return $this->id;
