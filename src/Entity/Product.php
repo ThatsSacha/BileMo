@@ -32,6 +32,16 @@ class Product
         $this->productImage = new ArrayCollection();
     }
 
+    public function jsonSerialize(): array {
+        return array(
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'dateReleased' => $this->getDateReleased(),
+            'productImage' => $this->getProductImageSerialized()
+        );
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -79,6 +89,16 @@ class Product
     public function getProductImage(): Collection
     {
         return $this->productImage;
+    }
+
+    public function getProductImageSerialized(): array
+    {
+        $resp = [];
+        foreach($this->productImage as $productImage) {
+            $resp[] = $productImage->jsonSerialize();
+        }
+
+        return $resp;
     }
 
     public function addProductImage(ProductImage $productImage): self

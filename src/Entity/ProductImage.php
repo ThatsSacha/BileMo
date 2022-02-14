@@ -20,6 +20,13 @@ class ProductImage
     #[ORM\JoinColumn(nullable: false)]
     private $product;
 
+    public function jsonSerialize(): array {
+        return array(
+            'id' => $this->getId(),
+            'url' => $this->getUrl()
+        );
+    }
+
     public function getId(): ?int
     {
         return $this->id;

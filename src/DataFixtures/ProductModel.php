@@ -58,6 +58,35 @@ class ProductModel {
                         'url' => 'https://media.gqmagazine.fr/photos/6149b7c09cdbb56dec63edfe/master/pass/Apple_iPhone-13-Pro_Colors_09142021.jpg'
                     ]
                 ]
+            ],
+            3 => [
+                'name' => 'Samsung Galaxy S8',
+                'description' => '5,8 pouces, 4G, caméra avant 12 mégapixels',
+                'dateReleased' => '2017-04-21',
+                'productImage' => [
+                    0 => [
+                        'url' => 'https://www.samsung.com/global/galaxy/galaxy-s8/images/galaxy-s8-share-image.jpg'
+                    ],
+                    1 => [
+                        'url' => 'https://www.mytrendyphone.co.uk/images2/Nillkin-Super-Frosted-Case-for-Samsung-Galaxy-S8-Black-27042017-01-p.jpg'
+                    ]
+                ]
+            ],
+            4 => [
+                'name' => 'Samsung Galaxy Z Fold3',
+                'description' => '5G, USB-C, 7,6 pouces, caméra 12 mégapixels',
+                'dateReleased' => '2021-09-27',
+                'productImage' => [
+                    0 => [
+                        'url' => 'https://images.samsung.com/sg/smartphones/galaxy-z-fold3-5g/buy/zfold3_carousel_mainsinglekv_mo.jpg'
+                    ],
+                    1 => [
+                        'url' => 'https://m.media-amazon.com/images/I/71MmJNwZcML._AC_SX679_.jpg'
+                    ],
+                    2 => [
+                        'url' => 'https://images.samsung.com/pk/smartphones/galaxy-z-fold3-5g/buy/zfold3_carousel_multitasking_kv_mo.jpgg'
+                    ]
+                ]
             ]
         );
     }
