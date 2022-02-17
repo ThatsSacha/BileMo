@@ -15,8 +15,12 @@ class ExceptionListener
     {
         $exception = $event->getThrowable();
         $resp = new JsonResponse(
-            ['error' => $exception->getMessage()
-        ], Response::HTTP_BAD_REQUEST);
+            [
+                'status' => 400,
+                'error' => $exception->getMessage()
+            ],
+            Response::HTTP_BAD_REQUEST
+        );
 
         $event->setResponse($resp);
     }

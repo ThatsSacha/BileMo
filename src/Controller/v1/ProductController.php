@@ -29,9 +29,9 @@ class ProductController extends AbstractController
     }
 
     #[Route('/{id}', name: 'product_show_detail', methods: ['GET'])]
-    public function showDetail(int $id): JsonResponse
+    public function showDetail($id): JsonResponse
     {
-        //$show = $this->productService->show($id, $this->getUser());
+        $show = $this->productService->findOneById($id);
 
         return new JsonResponse($show, $show['status']);
     }
