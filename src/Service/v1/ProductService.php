@@ -2,17 +2,22 @@
 
 namespace App\Service\v1;
 
-use App\Repository\ProductRepository;
 use App\Service\AbstractRestService;
+use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class ProductService extends AbstractRestService {
     private $repo;
 
     public function __construct(
-        ProductRepository $repo
+        ProductRepository $repo,
+        DenormalizerInterface $denormalizer,
+        EntityManagerInterface $entityManagerInterface
     ) {
-       $this->repo = $repo;
+        parent::__construct($denormalizer, $repo, $entityManagerInterface);
+        $this->repo = $repo;
     }
 
     /**
@@ -30,5 +35,32 @@ class ProductService extends AbstractRestService {
             'status' => Response::HTTP_OK,
             'data' => $productsSerialized
         ];
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function findOneById($id): array {
+        if (is_numeric($id)) {
+            $product = $this->findOneBy(['id' => $id]);
+
+            if ($product !== null) {
+                return [
+                    'status' => Response::HTTP_OK,
+                    'data' => $product->jsonSerialize()
+                ];
+            }
+    
+            return [
+                'status' => Response::HTTP_NOT_FOUND,
+                'data' => 'Product not found'
+            ];
+        } else {
+            return [
+                'status' => Response::HTTP_BAD_REQUEST,
+                'data' => 'The ID parameter must be a numeric'
+            ];
+        }
     }
 }
