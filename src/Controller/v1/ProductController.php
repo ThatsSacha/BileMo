@@ -2,7 +2,9 @@
 
 namespace App\Controller\v1;
 
+use Exception;
 use App\Service\v1\ProductService;
+use SebastianBergmann\Comparator\ExceptionComparator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
