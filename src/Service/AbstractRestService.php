@@ -80,7 +80,7 @@ class AbstractRestService {
     public function getBlankValue(array $data): array|false {
         $blankValues = [];
 
-        foreach ($data as $key => $value) {
+        foreach ($data as $key) {
             if (empty($data[$key]) || $data[$key] === null) {
                 $blankValues[] = $key;
             }
