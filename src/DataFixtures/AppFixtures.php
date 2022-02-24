@@ -43,10 +43,10 @@ class AppFixtures extends Fixture
                  ->setClient($faker->randomElement($clients));
             
             if ($i === 99) {
-                $user->setFirstName('Sacha')
-                    ->setLastName('COHEN')
-                    ->setEmail('contact@sacha-cohen.fr')
-                    ->setPassword('$2y$13$HmVJnid6pyJb1E/acpCIduTIIpWcploaYC42fd.94sjGihnzaYKb6')
+                $user->setFirstName('Default')
+                    ->setLastName('USER')
+                    ->setEmail('default@bilemo.io')
+                    ->setPassword('$2y$13$oeLo/Uu4wV6fjBdrlJHu5ut8dkruRPijIKZyRwLLu4I4HpxhOQDh.')
                     ->setClient($faker->randomElement($clients));
             }
 
