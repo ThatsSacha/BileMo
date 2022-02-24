@@ -2,7 +2,10 @@
 
 ##### BileMo is the 7th project of OpenClassrooms back-end course.
 ###### This project gives access to the BileMo's API for users, managed by its client.
-
+#
+#
+#
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a60ba1ec3ac342e4a26075951167a43f)](https://www.codacy.com/gh/ThatsSacha/BileMo/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ThatsSacha/BileMo&amp;utm_campaign=Badge_Grade)
 
 ### Tech
 
