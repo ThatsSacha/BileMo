@@ -7,24 +7,30 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 
 class ProductService extends AbstractRestService {
     private $repo;
+    private CacheInterface $cache;
 
     public function __construct(
         ProductRepository $repo,
         DenormalizerInterface $denormalizer,
-        EntityManagerInterface $entityManagerInterface
+        EntityManagerInterface $entityManagerInterface,
+        CacheInterface $cache
     ) {
         parent::__construct($denormalizer, $repo, $entityManagerInterface);
         $this->repo = $repo;
+        $this->cache = $cache;
     }
 
     /**
      * @return array
      */
     public function findAll(): array {
-        $products = $this->repo->findAll();
+        $products = $this->cache->get('products', function () {
+            return $this->repo->findAll();
+        });
         $productsSerialized = [];
     
         foreach ($products as $product) {
